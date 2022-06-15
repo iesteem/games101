@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/hw0",
+    "files.associations": {
+        "core": "cpp"
+    }
+}
