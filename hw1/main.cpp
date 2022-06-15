@@ -9,15 +9,15 @@ inline double Degree(double angle)  {return angle*MY_PI/180.0;}
 
 Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
 {
-    Eigen::Matrix4f view = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f mt = Eigen::Matrix4f::Identity();
 
     Eigen::Matrix4f translate;
     translate << 1, 0, 0, -eye_pos[0], 0, 1, 0, -eye_pos[1], 0, 0, 1,
-        -eye_pos[2], 0, 0, 0, 1;
+        -eye_pos[2], 0, 0, 0, 1;//怎么是横向量？
 
-    view = translate * view;
+    mt = translate * mt;
 
-    return view;
+    return mt;
 }
 
 Eigen::Matrix4f get_model_matrix(float rotation_angle)
