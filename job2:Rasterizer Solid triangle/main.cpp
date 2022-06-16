@@ -1,7 +1,6 @@
 #include <iostream>
 #include <opencv.hpp>
 #include "rasterizer.hpp"
-#include "global.hpp"
 #include "Triangle.hpp"
 
 constexpr double MY_PI = 3.1415926;
