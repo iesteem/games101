@@ -729,5 +729,4 @@ CMakeFiles/Rasterizer.dir/main.cpp.o: \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
-  /Users/iesteem/Code/games101/job2:Rasterizer\ Solid\ triangle/global.hpp \
   /Users/iesteem/Code/games101/job2:Rasterizer\ Solid\ triangle/Triangle.hpp
