@@ -1,10 +1,6 @@
-//
-// Created by goksu on 4/6/19.
-//
-
 #pragma once
 
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Eigen>
 #include <optional>
 #include <algorithm>
 #include "global.hpp"

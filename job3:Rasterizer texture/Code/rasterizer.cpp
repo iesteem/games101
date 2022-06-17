@@ -1,12 +1,7 @@
-//
-// Created by goksu on 4/6/19.
-//
-
 #include <algorithm>
-#include "rasterizer.hpp"
-#include <opencv2/opencv.hpp>
+#include <opencv.hpp>
 #include <math.h>
-
+#include "rasterizer.hpp"
 
 rst::pos_buf_id rst::rasterizer::load_positions(const std::vector<Eigen::Vector3f> &positions)
 {
@@ -37,7 +32,7 @@ rst::col_buf_id rst::rasterizer::load_normals(const std::vector<Eigen::Vector3f>
     auto id = get_next_id();
     nor_buf.emplace(id, normals);
 
-    normal_id = id;
+    normal_id = id;//更新normal_id
 
     return {id};
 }
@@ -46,98 +41,99 @@ rst::col_buf_id rst::rasterizer::load_normals(const std::vector<Eigen::Vector3f>
 // Bresenham's line drawing algorithm
 void rst::rasterizer::draw_line(Eigen::Vector3f begin, Eigen::Vector3f end)
 {
+    //求得起始点和终点的x、y坐标值
     auto x1 = begin.x();
     auto y1 = begin.y();
     auto x2 = end.x();
     auto y2 = end.y();
 
-    Eigen::Vector3f line_color = {255, 255, 255};
+    Eigen::Vector3f line_color = {255, 255, 255};//设置线段颜色
 
     int x,y,dx,dy,dx1,dy1,px,py,xe,ye,i;
 
-    dx=x2-x1;
-    dy=y2-y1;
-    dx1=fabs(dx);
-    dy1=fabs(dy);
-    px=2*dy1-dx1;
-    py=2*dx1-dy1;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    dx1 = fabs(dx);
+    dy1 = fabs(dy);
+    px = 2 * dy1 - dx1;
+    py = 2 * dx1 - dy1;
 
-    if(dy1<=dx1)
+    if(dy1 <= dx1)
     {
-        if(dx>=0)
+        if(dx >= 0)
         {
-            x=x1;
-            y=y1;
-            xe=x2;
+            x = x1;
+            y = y1;
+            xe = x2;
         }
         else
         {
-            x=x2;
-            y=y2;
-            xe=x1;
+            x = x2;
+            y = y2;
+            xe = x1;
         }
         Eigen::Vector2i point = Eigen::Vector2i(x, y);
-        set_pixel(point,line_color);
-        for(i=0;x<xe;i++)
+        set_pixel(point, line_color);
+        for(i = 0; x < xe; i++)
         {
-            x=x+1;
-            if(px<0)
+            x = x + 1;
+            if(px < 0)
             {
-                px=px+2*dy1;
+                px = px + 2 * dy1;
             }
             else
             {
-                if((dx<0 && dy<0) || (dx>0 && dy>0))
+                if((dx < 0 && dy < 0) || (dx > 0 && dy > 0))
                 {
-                    y=y+1;
+                    y = y + 1;
                 }
                 else
                 {
-                    y=y-1;
+                    y = y - 1;
                 }
-                px=px+2*(dy1-dx1);
+                px = px + 2 * (dy1 - dx1);
             }
-//            delay(0);
+
             Eigen::Vector2i point = Eigen::Vector2i(x, y);
             set_pixel(point,line_color);
         }
     }
     else
     {
-        if(dy>=0)
+        if(dy >= 0)
         {
-            x=x1;
-            y=y1;
-            ye=y2;
+            x = x1;
+            y = y1;
+            ye = y2;
         }
         else
         {
-            x=x2;
-            y=y2;
-            ye=y1;
+            x = x2;
+            y = y2;
+            ye = y1;
         }
         Eigen::Vector2i point = Eigen::Vector2i(x, y);
         set_pixel(point,line_color);
-        for(i=0;y<ye;i++)
+        for(i = 0; y < ye; i++)
         {
-            y=y+1;
-            if(py<=0)
+            y = y + 1;
+            if(py <= 0)
             {
-                py=py+2*dx1;
+                py = py + 2 * dx1;
             }
             else
             {
-                if((dx<0 && dy<0) || (dx>0 && dy>0))
+                if((dx < 0 && dy < 0) || (dx > 0 && dy > 0))
                 {
-                    x=x+1;
+                    x = x + 1;
                 }
                 else
                 {
-                    x=x-1;
+                    x = x - 1;
                 }
-                py=py+2*(dx1-dy1);
+                py = py + 2 * (dx1 - dy1);
             }
-//            delay(0);
+
             Eigen::Vector2i point = Eigen::Vector2i(x, y);
             set_pixel(point,line_color);
         }
@@ -151,14 +147,14 @@ auto to_vec4(const Eigen::Vector3f& v3, float w = 1.0f)
 
 static bool insideTriangle(float x, float y, const Vector4f* _v){
     Vector3f v[3];
-    for(int i=0;i<3;i++)
-        v[i] = {_v[i].x(),_v[i].y(), 1.0};
+    for(int i = 0; i < 3; i++)
+        v[i] = {_v[i].x(), _v[i].y(), 1.0};
     Vector3f f0,f1,f2;
     f0 = v[1].cross(v[0]);
     f1 = v[2].cross(v[1]);
     f2 = v[0].cross(v[2]);
-    Vector3f p(x,y,1.);
-    if((p.dot(f0)*f0.dot(v[2])>0) && (p.dot(f1)*f1.dot(v[0])>0) && (p.dot(f2)*f2.dot(v[1])>0))
+    Vector3f p(x, y, 1.);
+    if((p.dot(f0) * f0.dot(v[2]) > 0) && (p.dot(f1) * f1.dot(v[0]) > 0) && (p.dot(f2) * f2.dot(v[1]) > 0))
         return true;
     return false;
 }
@@ -265,8 +261,9 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
     //    * Z is interpolated view space depth for the current pixel
     //    * zp is depth between zNear and zFar, used for z-buffer
 
-    auto v = t.toVector4();
+    auto v = t.toVector4();//顶点坐标由Vector3f类型被齐次化为Vector4f类型
 
+    //AABB轴对齐包围盒
     float min_x=std::min(std::min(v[0][0], v[1][0]), v[2][0]);
     float max_x=std::max(std::max(v[0][0], v[1][0]), v[2][0]);
     float min_y=std::min(std::min(v[0][1], v[1][1]), v[2][1]);
@@ -282,17 +279,17 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
     // TODO : set the current pixel (use the set_pixel function) to the color of the triangle (use getColor function) if it should be painted.
 
     // without anti-alising
-    for(int x=x_min; x<=x_max; x++)
+    for(int x = x_min; x <= x_max; x++)
     {
-        for(int y=y_min; y<=y_max; y++)
+        for(int y = y_min; y <= y_max; y++)//遍历AABB中的每一个坐标
         {
             // we need to decide whether this point is actually inside the triangle
             if(!insideTriangle((float)x+0.5,(float)y+0.5,t.v))    continue; // note: we use x+0.5 here to improve the precision
             // get z value--depth
             // If so, use the following code to get the interpolated z value.
-            auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+            auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);//坐标(x,y)在三角形内的重心坐标，返回类型为tuple
 
-            float Z = 1.0 / (alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+            float Z = 1.0 / (alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());//齐次化项的倒数
             float zp = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
             zp *= Z;
 
@@ -309,11 +306,11 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t, const std::array<Eig
                 // interpolate texture
                 auto interpolated_texcoords=interpolate(alpha, beta, gamma, t.tex_coords[0], t.tex_coords[1], t.tex_coords[2], 1);
                 // interpolate shading_coords
-                auto interpolated_shadingcoords=interpolate(alpha, beta, gamma, view_pos[0], view_pos[0], view_pos[0], 1);
+                auto interpolated_shadingcoords=interpolate(alpha, beta, gamma, view_pos[0], view_pos[0], view_pos[0], 1);//？
 
                 // the following part is the givn code
                 fragment_shader_payload payload(interpolated_color, interpolated_normal.normalized(), interpolated_texcoords, texture ? &*texture : nullptr);
-                payload.view_pos = interpolated_shadingcoords;
+                payload.view_pos = interpolated_shadingcoords;//？
                 // Instead of passing the triangle's color directly to the frame buffer, pass the color to the shaders first to get the final color;
                 auto pixel_color = fragment_shader(payload);
 

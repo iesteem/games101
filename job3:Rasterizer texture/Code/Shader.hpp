@@ -1,10 +1,6 @@
-//
-// Created by LEI XU on 4/27/19.
-//
-
 #ifndef RASTERIZER_SHADER_H
 #define RASTERIZER_SHADER_H
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Eigen>
 #include "Texture.hpp"
 
 

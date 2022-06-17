@@ -1,12 +1,8 @@
-//
-// Created by LEI XU on 4/27/19.
-//
-
 #ifndef RASTERIZER_TEXTURE_H
 #define RASTERIZER_TEXTURE_H
 #include "global.hpp"
-#include <eigen3/Eigen/Eigen>
-#include <opencv2/opencv.hpp>
+#include <Eigen/Eigen>
+#include <opencv.hpp>
 class Texture{
 private:
     cv::Mat image_data;
@@ -22,29 +18,35 @@ public:
 
     int width, height;
 
+    /*
+    **UV坐标系的原点在左下角，而给定float类型的u、v值原点在左上角
+    */
     Eigen::Vector3f getColor(float u, float v)
     {
-        u=std::min(1.0f, std::max(0.0f, u)); // you should set constraints
-        v=std::min(1.0f, std::max(0.0f, v));
+        u = std::min(1.0f, std::max(0.0f, u));//保证u的取值在[0.,1.]内
+        v = std::min(1.0f, std::max(0.0f, v));
 
-        auto u_img = u * width; 
-        auto v_img = (1 - v) * height;
-        auto color = image_data.at<cv::Vec3b>(v_img, u_img);
-        return Eigen::Vector3f(color[0], color[1], color[2]);
+        auto u_img = u * width;//u对应的U轴坐标值 
+        auto v_img = (1 - v) * height;//v对应的V轴坐标值
+        auto color = image_data.at<cv::Vec3b>(v_img, u_img);//取得该坐标点处的color值
+        return Eigen::Vector3f(color[0], color[1], color[2]);//以Vector3f类型返回color值
     }
 
+    /*
+    **双线性插值
+    */
     Eigen::Vector3f getColorBilinear(float u, float v)
     {
-        u=std::min(1.0f, std::max(0.0f, u)); // you should set constraints
+        u=std::min(1.0f, std::max(0.0f, u));
         v=std::min(1.0f, std::max(0.0f, v));
         
         auto u_img = u * width; 
         auto v_img = (1 - v) * height;
 
-        auto u_min=std::floor(u_img);
-        auto u_max=std::ceil(u_img);
-        auto v_min=std::floor(v_img);
-        auto v_max=std::ceil(v_img);
+        auto u_min = std::floor(u_img);//？
+        auto u_max = std::ceil(u_img);
+        auto v_min = std::floor(v_img);
+        auto v_max = std::ceil(v_img);
 
         // Color_11 Color_12
         // Color_21 Color_22
