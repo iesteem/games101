@@ -1426,7 +1426,6 @@ CMakeFiles/Rasterizer.dir/main.cpp.o: ../main.cpp \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
-  ../global.hpp \
   ../Triangle.hpp
 
 CMakeFiles/Rasterizer.dir/rasterizer.cpp.o: ../rasterizer.cpp \
@@ -2123,7 +2122,6 @@ CMakeFiles/Rasterizer.dir/rasterizer.cpp.o: ../rasterizer.cpp \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
   /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/list \
-  ../global.hpp \
   ../Triangle.hpp \
   /opt/homebrew/Cellar/opencv@2/2.4.13.7_12/include/opencv2/opencv.hpp \
   /opt/homebrew/Cellar/opencv@2/2.4.13.7_12/include/opencv2/opencv_modules.hpp \
@@ -2492,8 +2490,6 @@ CMakeFiles/Rasterizer.dir/rasterizer.cpp.o: ../rasterizer.cpp \
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/sys/_types/_fd_clr.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/sys/_types/_fd_def.h:
-
-../global.hpp:
 
 /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h:
 

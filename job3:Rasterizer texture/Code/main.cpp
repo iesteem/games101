@@ -94,6 +94,57 @@ struct light
     Eigen::Vector3f intensity;
 };
 
+Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
+{
+    //设置blinn phong reflection parameters
+    Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
+    Eigen::Vector3f kd = payload.color;
+    Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
+
+    //两个光源
+    auto l1 = light{{20, 20, 20}, {500, 500, 500}};
+    auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
+
+    std::vector<light> lights = {l1, l2};
+    Eigen::Vector3f amb_light_intensity{10, 10, 10};
+    Eigen::Vector3f eye_pos{0, 0, 10};
+
+    float p = 150;//specluar幂值
+
+    Eigen::Vector3f color = payload.color;//shading point处的颜色向量
+    Eigen::Vector3f point = payload.view_pos;//shading point位置点坐标
+    Eigen::Vector3f normal = payload.normal;//shading point处的法向量
+
+    Eigen::Vector3f result_color = {0, 0, 0};//作为返回的着色结果颜色向量
+    for (auto& light : lights)//遍历光源
+    {
+        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
+        // components are. Then, accumulate that result on the *result_color* object.
+        Eigen::Vector3f l = light.position - point;//view_position -> light source，入射光线方向向量l
+        Eigen::Vector3f v = eye_pos - point; // view_position -> eye，观察向量v
+        
+        float r2 = l.dot(l);//r即是向量l的长度，根据长度公式和点乘计算公式，知：向量点乘自身，结果即是长度的平方
+
+        //向量归一化
+        l = l.normalized();
+        v = v.normalized();
+
+        //ka, kd, ks课程中介绍是数值常量, 此处被定义为Vector3f类型，使用cwiseProduct函数来实现数乘向量结果
+        // ambient La=ka*Ia 
+        Eigen::Vector3f La = ka.cwiseProduct(amb_light_intensity);
+
+        // diffuse Ld=kd(I/r^2)max(0, nl)
+        Eigen::Vector3f Ld = kd.cwiseProduct(light.intensity / r2) * std::max(0.0f, normal.normalized().dot(l));
+
+        // specular Ls=ks(I/r^2)max(0, nh)^p
+        Eigen::Vector3f h = ( l + v ).normalized();//半程向量归一化
+        Eigen::Vector3f Ls = ks.cwiseProduct(light.intensity / r2)*std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
+        
+        result_color += (La + Ld + Ls);
+    }
+    return result_color * 255.f;
+}
+
 Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
 {
     Eigen::Vector3f return_color = {0, 0, 0};
@@ -109,7 +160,7 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     texture_color << return_color.x(), return_color.y(), return_color.z();
 
     Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
-    Eigen::Vector3f kd = texture_color / 255.f;
+    Eigen::Vector3f kd = texture_color / 255.f;//纹理颜色值作为kd
     Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
 
     auto l1 = light{{20, 20, 20}, {500, 500, 500}};
@@ -131,163 +182,31 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     {
         // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
         // components are. Then, accumulate that result on the *result_color* object.
-        Eigen::Vector3f l=light.position-point; // view_position -> light source
-        Eigen::Vector3f v=eye_pos-point; // view_position -> eye
+        Eigen::Vector3f l = light.position - point; // view_position -> light source
+        Eigen::Vector3f v = eye_pos - point; // view_position -> eye
 
-        float r2=l.dot(l); // l cannot be normalized before, because r2 is the distance
+        float r2 = l.dot(l); // l cannot be normalized before, because r2 is the distance
 
         // note: l, v should be normalized
-        l=l.normalized();
-        v=v.normalized();
+        l = l.normalized();
+        v = v.normalized();
 
         // note: ka, kd, ks are scalars in lecture, but they are vectors here, so you should use cwiseProduct
         // ambient La=ka*Ia
-        Eigen::Vector3f La=ka.cwiseProduct(amb_light_intensity); // cwiseProduct--dot product
+        Eigen::Vector3f La = ka.cwiseProduct(amb_light_intensity); // cwiseProduct--dot product
 
         // diffuse Ld=kd(I/r^2)max(0, nl)
-        Eigen::Vector3f Ld=kd.cwiseProduct(light.intensity / r2)*std::max(0.0f, normal.normalized().dot(l));
+        Eigen::Vector3f Ld = kd.cwiseProduct(light.intensity / r2) * std::max(0.0f, normal.normalized().dot(l));
 
         // specular Ls=ks(I/r^2)max(0, nh)^p
-        Eigen::Vector3f h=(l+v).normalized();
-        Eigen::Vector3f Ls=ks.cwiseProduct(light.intensity / r2)*std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
+        Eigen::Vector3f h = (l + v).normalized();
+        Eigen::Vector3f Ls = ks.cwiseProduct(light.intensity / r2) * std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
         
-        result_color+=(La+Ld+Ls);
+        result_color += (La + Ld + Ls);
     }
 
     return result_color * 255.f;
 }
-
-Eigen::Vector3f phong_fragment_shader(const fragment_shader_payload& payload)
-{
-    Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
-    Eigen::Vector3f kd = payload.color;
-    Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
-
-    auto l1 = light{{20, 20, 20}, {500, 500, 500}};
-    auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
-
-    std::vector<light> lights = {l1, l2};
-    Eigen::Vector3f amb_light_intensity{10, 10, 10};
-    Eigen::Vector3f eye_pos{0, 0, 10};
-
-    float p = 150;
-
-    Eigen::Vector3f color = payload.color;
-    Eigen::Vector3f point = payload.view_pos;
-    Eigen::Vector3f normal = payload.normal;
-
-    Eigen::Vector3f result_color = {0, 0, 0};
-    for (auto& light : lights)
-    {
-        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
-        // components are. Then, accumulate that result on the *result_color* object.
-        Eigen::Vector3f l=light.position-point; // view_position -> light source
-        Eigen::Vector3f v=eye_pos-point; // view_position -> eye
-
-        float r2=l.dot(l); // l cannot be normalized before, because r2 is the distance
-
-        // note: l, v should be normalized
-        l=l.normalized();
-        v=v.normalized();
-
-        // note: ka, kd, ks are scalars in lecture, but they are vectors here, so you should use cwiseProduct
-        // ambient La=ka*Ia
-        Eigen::Vector3f La=ka.cwiseProduct(amb_light_intensity); // cwiseProduct--dot product
-
-        // diffuse Ld=kd(I/r^2)max(0, nl)
-        Eigen::Vector3f Ld=kd.cwiseProduct(light.intensity / r2)*std::max(0.0f, normal.normalized().dot(l));
-
-        // specular Ls=ks(I/r^2)max(0, nh)^p
-        Eigen::Vector3f h=(l+v).normalized();
-        Eigen::Vector3f Ls=ks.cwiseProduct(light.intensity / r2)*std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
-        
-        result_color+=(La+Ld+Ls);
-    }
-    return result_color * 255.f;
-}
-
-
-
-Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payload)
-{
-    
-    Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
-    Eigen::Vector3f kd = payload.color;
-    Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
-
-    auto l1 = light{{20, 20, 20}, {500, 500, 500}};
-    auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
-
-    std::vector<light> lights = {l1, l2};
-    Eigen::Vector3f amb_light_intensity{10, 10, 10};
-    Eigen::Vector3f eye_pos{0, 0, 10};
-
-    float p = 150;
-
-    Eigen::Vector3f color = payload.color; 
-    Eigen::Vector3f point = payload.view_pos;
-    Eigen::Vector3f normal = payload.normal;
-
-    float kh = 0.2, kn = 0.1;
-    
-    // TODO: Implement displacement mapping here
-
-    // Let n = normal = (x, y, z)
-    auto x=normal.x(), y=normal.y(), z=normal.z();
-    // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
-    Eigen::Vector3f t(x*y/std::sqrt(x*x+z*z), std::sqrt(x*x+z*z), z*y/sqrt(x*x+z*z));
-    // Vector b = n cross product t
-    Eigen::Vector3f b=normal.cross(t);
-    // Matrix TBN = [t b n]
-    Eigen::Matrix3f TBN;
-    TBN << t.x(),b.x(),normal.x(),
-           t.y(),b.y(),normal.y(),
-           t.z(),b.z(),normal.z();
-    // dU = kh * kn * (h(u+1/w,v)-h(u,v))
-    float h=payload.texture->height, w=payload.texture->width, u=payload.tex_coords.x(), v=payload.tex_coords.y();
-    float dU=kh*kn*(payload.texture->getColorBilinear(u+1/w,v).norm()-payload.texture->getColorBilinear(u,v).norm()); // note: it should be .norm(), we only need the value
-    // dV = kh * kn * (h(u,v+1/h)-h(u,v))
-    float dV=kh*kn*(payload.texture->getColorBilinear(u,v+1/h).norm()-payload.texture->getColorBilinear(u,v).norm());
-    // Vector ln = (-dU, -dV, 1)
-    Eigen::Vector3f ln(-dU, -dV, 1);
-    // Position p = p + kn * n * h(u,v)
-    point+=kn*normal*payload.texture->getColorBilinear(u,v).norm();
-    // Normal n = normalize(TBN * ln)
-    normal = (TBN * ln).normalized();
-
-    Eigen::Vector3f result_color = {0, 0, 0};
-
-    for (auto& light : lights)
-    {
-        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
-        // components are. Then, accumulate that result on the *result_color* object.
-        Eigen::Vector3f l=light.position-point; // view_position -> light source
-        Eigen::Vector3f v=eye_pos-point; // view_position -> eye
-
-        float r2=l.dot(l); // l cannot be normalized before, because r2 is the distance
-
-        // note: l, v should be normalized
-        l=l.normalized();
-        v=v.normalized();
-
-        // note: ka, kd, ks are scalars in lecture, but they are vectors here, so you should use cwiseProduct
-        // ambient La=ka*Ia
-        Eigen::Vector3f La=ka.cwiseProduct(amb_light_intensity); // cwiseProduct--dot product
-
-        // diffuse Ld=kd(I/r^2)max(0, nl)
-        Eigen::Vector3f Ld=kd.cwiseProduct(light.intensity / r2)*std::max(0.0f, normal.normalized().dot(l));
-
-        // specular Ls=ks(I/r^2)max(0, nh)^p
-        Eigen::Vector3f h=(l+v).normalized();
-        Eigen::Vector3f Ls=ks.cwiseProduct(light.intensity / r2)*std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
-        
-        result_color+=(La+Ld+Ls);
-
-    }
-
-    return result_color * 255.f;
-}
-
 
 Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
 {
@@ -315,21 +234,21 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
     // TODO: Implement bump mapping here
 
     // Let n = normal = (x, y, z)
-    auto x=normal.x(), y=normal.y(), z=normal.z();
+    auto x = normal.x(), y = normal.y(), z = normal.z();
     // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
-    Eigen::Vector3f t(x*y/std::sqrt(x*x+z*z), std::sqrt(x*x+z*z), z*y/sqrt(x*x+z*z));
+    Eigen::Vector3f t(x * y /std::sqrt(x * x + z * z), std::sqrt( x * x + z * z), z * y / sqrt( x * x + z * z));
     // Vector b = n cross product t
-    Eigen::Vector3f b=normal.cross(t);
+    Eigen::Vector3f b = normal.cross(t);
     // Matrix TBN = [t b n]
     Eigen::Matrix3f TBN;
-    TBN << t.x(),b.x(),normal.x(),
-           t.y(),b.y(),normal.y(),
-           t.z(),b.z(),normal.z();
+    TBN << t.x(), b.x(), normal.x(),
+           t.y(), b.y(), normal.y(),
+           t.z(), b.z(), normal.z();//初始化顺序为行优先(存储后读取时为列优先)
     // dU = kh * kn * (h(u+1/w,v)-h(u,v))
-    float h=payload.texture->height, w=payload.texture->width, u=payload.tex_coords.x(), v=payload.tex_coords.y();
-    float dU=kh*kn*(payload.texture->getColorBilinear(u+1/w,v).norm()-payload.texture->getColorBilinear(u,v).norm()); // note: it should be .norm(), we only need the value
+    float h = payload.texture->height, w=payload.texture->width, u=payload.tex_coords.x(), v=payload.tex_coords.y();
+    float dU = kh * kn * (payload.texture->getColorBilinear( u + 1 / w, v).norm() - payload.texture->getColorBilinear(u, v).norm());//必须归一化
     // dV = kh * kn * (h(u,v+1/h)-h(u,v))
-    float dV=kh*kn*(payload.texture->getColorBilinear(u,v+1/h).norm()-payload.texture->getColorBilinear(u,v).norm());
+    float dV = kh * kn * (payload.texture->getColorBilinear(u, v + 1 / h).norm()-payload.texture->getColorBilinear(u, v).norm());
     // Vector ln = (-dU, -dV, 1)
     Eigen::Vector3f ln(-dU, -dV, 1);
     // Normal n = normalize(TBN * ln)
@@ -340,6 +259,87 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
 
     return result_color * 255.f;
 }
+
+Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payload)
+{
+    
+    Eigen::Vector3f ka = Eigen::Vector3f(0.005, 0.005, 0.005);
+    Eigen::Vector3f kd = payload.color;
+    Eigen::Vector3f ks = Eigen::Vector3f(0.7937, 0.7937, 0.7937);
+
+    auto l1 = light{{20, 20, 20}, {500, 500, 500}};
+    auto l2 = light{{-20, 20, 0}, {500, 500, 500}};
+
+    std::vector<light> lights = {l1, l2};
+    Eigen::Vector3f amb_light_intensity{10, 10, 10};
+    Eigen::Vector3f eye_pos{0, 0, 10};
+
+    float p = 150;
+
+    Eigen::Vector3f color = payload.color; 
+    Eigen::Vector3f point = payload.view_pos;
+    Eigen::Vector3f normal = payload.normal;
+
+    float kh = 0.2, kn = 0.1;
+    
+    // TODO: Implement displacement mapping here
+
+    // Let n = normal = (x, y, z)
+    auto x = normal.x(), y = normal.y(), z = normal.z();
+    // Vector t = (x*y/sqrt(x*x+z*z),sqrt(x*x+z*z),z*y/sqrt(x*x+z*z))
+    Eigen::Vector3f t(x * y / std::sqrt(x * x + z * z), std::sqrt(x * x + z * z), z * y / sqrt(x * x + z * z));
+    // Vector b = n cross product t
+    Eigen::Vector3f b = normal.cross(t);
+    // Matrix TBN = [t b n]
+    Eigen::Matrix3f TBN;
+    TBN << t.x(),b.x(),normal.x(),
+           t.y(),b.y(),normal.y(),
+           t.z(),b.z(),normal.z();
+    // dU = kh * kn * (h(u+1/w,v)-h(u,v))
+    float h = payload.texture->height, w = payload.texture->width, u = payload.tex_coords.x(), v = payload.tex_coords.y();
+    float dU= kh * kn * (payload.texture->getColorBilinear(u + 1 / w, v).norm()-payload.texture->getColorBilinear(u, v).norm());//归一化取值
+    // dV = kh * kn * (h(u,v+1/h)-h(u,v))
+    float dV=kh * kn * (payload.texture->getColorBilinear(u, v + 1 / h).norm()-payload.texture->getColorBilinear(u, v).norm());
+    // Vector ln = (-dU, -dV, 1)
+    Eigen::Vector3f ln(-dU, -dV, 1);
+    // Position p = p + kn * n * h(u,v)
+    point += kn * normal * payload.texture->getColorBilinear(u, v).norm();
+    // Normal n = normalize(TBN * ln)
+    normal = (TBN * ln).normalized();
+
+    Eigen::Vector3f result_color = {0, 0, 0};
+
+    for (auto& light : lights)//遍历光源
+    {
+        // TODO: For each light source in the code, calculate what the *ambient*, *diffuse*, and *specular* 
+        // components are. Then, accumulate that result on the *result_color* object.
+        Eigen::Vector3f l = light.position - point; // view_position -> light source
+        Eigen::Vector3f v = eye_pos - point; // view_position -> eye
+
+        float r2 = l.dot(l); // l cannot be normalized before, because r2 is the distance
+
+        // note: l, v should be normalized
+        l = l.normalized();
+        v = v.normalized();
+
+        // note: ka, kd, ks are scalars in lecture, but they are vectors here, so you should use cwiseProduct
+        // ambient La=ka*Ia
+        Eigen::Vector3f La=ka.cwiseProduct(amb_light_intensity); // cwiseProduct--dot product
+
+        // diffuse Ld=kd(I/r^2)max(0, nl)
+        Eigen::Vector3f Ld=kd.cwiseProduct(light.intensity / r2)*std::max(0.0f, normal.normalized().dot(l));
+
+        // specular Ls=ks(I/r^2)max(0, nh)^p
+        Eigen::Vector3f h=(l+v).normalized();
+        Eigen::Vector3f Ls=ks.cwiseProduct(light.intensity / r2)*std::pow(std::max(0.0f, normal.normalized().dot(h)), p);
+        
+        result_color+=(La+Ld+Ls);
+
+    }
+
+    return result_color * 255.f;
+}
+
 
 int main(int argc, const char** argv)
 {
@@ -372,21 +372,14 @@ int main(int argc, const char** argv)
     auto texture_path = "../models/spot/hmap.jpg";
     r.set_texture(Texture(texture_path));
 
-    std::function<Eigen::Vector3f(fragment_shader_payload)> active_shader = phong_fragment_shader;
+    std::function<Eigen::Vector3f(fragment_shader_payload)> active_shader = displacement_fragment_shader;
 
     if (argc >= 2)
     {
         command_line = true;
         filename = std::string(argv[1]);
 
-        if (argc == 3 && std::string(argv[2]) == "texture")
-        {
-            std::cout << "Rasterizing using the texture shader\n";
-            active_shader = texture_fragment_shader;
-            texture_path = "../models/spot/spot_texture.png";
-            r.set_texture(Texture(texture_path));
-        }
-        else if (argc == 3 && std::string(argv[2]) == "normal")
+        if (argc == 3 && std::string(argv[2]) == "normal")
         {
             std::cout << "Rasterizing using the normal shader\n";
             active_shader = normal_fragment_shader;
@@ -395,6 +388,13 @@ int main(int argc, const char** argv)
         {
             std::cout << "Rasterizing using the phong shader\n";
             active_shader = phong_fragment_shader;
+        }
+        else if (argc == 3 && std::string(argv[2]) == "texture")
+        {
+            std::cout << "Rasterizing using the texture shader\n";
+            active_shader = texture_fragment_shader;
+            texture_path = "../models/spot/spot_texture.png";
+            r.set_texture(Texture(texture_path));
         }
         else if (argc == 3 && std::string(argv[2]) == "bump")
         {

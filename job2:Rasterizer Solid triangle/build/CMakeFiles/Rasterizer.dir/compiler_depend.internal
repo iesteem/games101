@@ -1428,7 +1428,6 @@ CMakeFiles/Rasterizer.dir/main.cpp.o
  /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h
  /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h
  /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
- /Users/iesteem/Code/games101/job2:Rasterizer Solid triangle/global.hpp
  /Users/iesteem/Code/games101/job2:Rasterizer Solid triangle/Triangle.hpp
 
 CMakeFiles/Rasterizer.dir/rasterizer.cpp.o
@@ -2126,7 +2125,6 @@ CMakeFiles/Rasterizer.dir/rasterizer.cpp.o
  /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h
  /opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/list
- /Users/iesteem/Code/games101/job2:Rasterizer Solid triangle/global.hpp
  /Users/iesteem/Code/games101/job2:Rasterizer Solid triangle/Triangle.hpp
  /opt/homebrew/Cellar/opencv@2/2.4.13.7_12/include/opencv2/opencv.hpp
  /opt/homebrew/Cellar/opencv@2/2.4.13.7_12/include/opencv2/opencv_modules.hpp
