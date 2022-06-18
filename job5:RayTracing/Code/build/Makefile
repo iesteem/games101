@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.22.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/iesteem/Code/games101/job5:RayTracing/Code
+CMAKE_SOURCE_DIR = /Users/iesteem/Code/games101/job5:RayTracing/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/iesteem/Code/games101/job5:RayTracing/Code/build
+CMAKE_BINARY_DIR = /Users/iesteem/Code/games101/job5:RayTracing/code/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles /Users/iesteem/Code/games101/job5:RayTracing/Code/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles /Users/iesteem/Code/games101/job5:RayTracing/code/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -153,30 +153,6 @@ Renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayTracing.dir/build.make CMakeFiles/RayTracing.dir/Renderer.cpp.s
 .PHONY : Renderer.cpp.s
 
-Scene.o: Scene.cpp.o
-.PHONY : Scene.o
-
-# target to build an object file
-Scene.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayTracing.dir/build.make CMakeFiles/RayTracing.dir/Scene.cpp.o
-.PHONY : Scene.cpp.o
-
-Scene.i: Scene.cpp.i
-.PHONY : Scene.i
-
-# target to preprocess a source file
-Scene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayTracing.dir/build.make CMakeFiles/RayTracing.dir/Scene.cpp.i
-.PHONY : Scene.cpp.i
-
-Scene.s: Scene.cpp.s
-.PHONY : Scene.s
-
-# target to generate assembly for a file
-Scene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayTracing.dir/build.make CMakeFiles/RayTracing.dir/Scene.cpp.s
-.PHONY : Scene.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -213,9 +189,6 @@ help:
 	@echo "... Renderer.o"
 	@echo "... Renderer.i"
 	@echo "... Renderer.s"
-	@echo "... Scene.o"
-	@echo "... Scene.i"
-	@echo "... Scene.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

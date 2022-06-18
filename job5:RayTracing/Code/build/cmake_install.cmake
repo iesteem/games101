@@ -1,4 +1,4 @@
-# Install script for directory: /Users/iesteem/Code/games101/job5:RayTracing/Code
+# Install script for directory: /Users/iesteem/Code/games101/job5:RayTracing/code
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/iesteem/Code/games101/job5:RayTracing/Code/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/iesteem/Code/games101/job5:RayTracing/code/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

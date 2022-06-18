@@ -1,5 +1,5 @@
 CMakeFiles/RayTracing.dir/Renderer.cpp.o: \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.cpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/fstream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__availability \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__config \
@@ -419,17 +419,17 @@ CMakeFiles/RayTracing.dir/Renderer.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/deque \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__split_buffer \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/iomanip \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Vector.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Vector.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/cmath \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/math.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/math.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/iostream \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Scene.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Scene.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Object.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/global.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Object.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/global.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/random \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/numeric \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Light.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Light.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/optional

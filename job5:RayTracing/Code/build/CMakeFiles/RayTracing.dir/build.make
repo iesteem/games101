@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.22.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/iesteem/Code/games101/job5:RayTracing/Code
+CMAKE_SOURCE_DIR = /Users/iesteem/Code/games101/job5:RayTracing/code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/iesteem/Code/games101/job5:RayTracing/Code/build
+CMAKE_BINARY_DIR = /Users/iesteem/Code/games101/job5:RayTracing/code/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/RayTracing.dir/depend.make
@@ -72,60 +72,44 @@ include CMakeFiles/RayTracing.dir/flags.make
 CMakeFiles/RayTracing.dir/main.cpp.o: CMakeFiles/RayTracing.dir/flags.make
 CMakeFiles/RayTracing.dir/main.cpp.o: ../main.cpp
 CMakeFiles/RayTracing.dir/main.cpp.o: CMakeFiles/RayTracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/RayTracing.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayTracing.dir/main.cpp.o -MF CMakeFiles/RayTracing.dir/main.cpp.o.d -o CMakeFiles/RayTracing.dir/main.cpp.o -c /Users/iesteem/Code/games101/job5:RayTracing/Code/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/RayTracing.dir/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayTracing.dir/main.cpp.o -MF CMakeFiles/RayTracing.dir/main.cpp.o.d -o CMakeFiles/RayTracing.dir/main.cpp.o -c /Users/iesteem/Code/games101/job5:RayTracing/code/main.cpp
 
 CMakeFiles/RayTracing.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RayTracing.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iesteem/Code/games101/job5:RayTracing/Code/main.cpp > CMakeFiles/RayTracing.dir/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iesteem/Code/games101/job5:RayTracing/code/main.cpp > CMakeFiles/RayTracing.dir/main.cpp.i
 
 CMakeFiles/RayTracing.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RayTracing.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iesteem/Code/games101/job5:RayTracing/Code/main.cpp -o CMakeFiles/RayTracing.dir/main.cpp.s
-
-CMakeFiles/RayTracing.dir/Scene.cpp.o: CMakeFiles/RayTracing.dir/flags.make
-CMakeFiles/RayTracing.dir/Scene.cpp.o: ../Scene.cpp
-CMakeFiles/RayTracing.dir/Scene.cpp.o: CMakeFiles/RayTracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/RayTracing.dir/Scene.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayTracing.dir/Scene.cpp.o -MF CMakeFiles/RayTracing.dir/Scene.cpp.o.d -o CMakeFiles/RayTracing.dir/Scene.cpp.o -c /Users/iesteem/Code/games101/job5:RayTracing/Code/Scene.cpp
-
-CMakeFiles/RayTracing.dir/Scene.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RayTracing.dir/Scene.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iesteem/Code/games101/job5:RayTracing/Code/Scene.cpp > CMakeFiles/RayTracing.dir/Scene.cpp.i
-
-CMakeFiles/RayTracing.dir/Scene.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RayTracing.dir/Scene.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iesteem/Code/games101/job5:RayTracing/Code/Scene.cpp -o CMakeFiles/RayTracing.dir/Scene.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iesteem/Code/games101/job5:RayTracing/code/main.cpp -o CMakeFiles/RayTracing.dir/main.cpp.s
 
 CMakeFiles/RayTracing.dir/Renderer.cpp.o: CMakeFiles/RayTracing.dir/flags.make
 CMakeFiles/RayTracing.dir/Renderer.cpp.o: ../Renderer.cpp
 CMakeFiles/RayTracing.dir/Renderer.cpp.o: CMakeFiles/RayTracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/RayTracing.dir/Renderer.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayTracing.dir/Renderer.cpp.o -MF CMakeFiles/RayTracing.dir/Renderer.cpp.o.d -o CMakeFiles/RayTracing.dir/Renderer.cpp.o -c /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/RayTracing.dir/Renderer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayTracing.dir/Renderer.cpp.o -MF CMakeFiles/RayTracing.dir/Renderer.cpp.o.d -o CMakeFiles/RayTracing.dir/Renderer.cpp.o -c /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.cpp
 
 CMakeFiles/RayTracing.dir/Renderer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RayTracing.dir/Renderer.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.cpp > CMakeFiles/RayTracing.dir/Renderer.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.cpp > CMakeFiles/RayTracing.dir/Renderer.cpp.i
 
 CMakeFiles/RayTracing.dir/Renderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RayTracing.dir/Renderer.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.cpp -o CMakeFiles/RayTracing.dir/Renderer.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.cpp -o CMakeFiles/RayTracing.dir/Renderer.cpp.s
 
 # Object files for target RayTracing
 RayTracing_OBJECTS = \
 "CMakeFiles/RayTracing.dir/main.cpp.o" \
-"CMakeFiles/RayTracing.dir/Scene.cpp.o" \
 "CMakeFiles/RayTracing.dir/Renderer.cpp.o"
 
 # External object files for target RayTracing
 RayTracing_EXTERNAL_OBJECTS =
 
 RayTracing: CMakeFiles/RayTracing.dir/main.cpp.o
-RayTracing: CMakeFiles/RayTracing.dir/Scene.cpp.o
 RayTracing: CMakeFiles/RayTracing.dir/Renderer.cpp.o
 RayTracing: CMakeFiles/RayTracing.dir/build.make
 RayTracing: CMakeFiles/RayTracing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable RayTracing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable RayTracing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RayTracing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -137,6 +121,6 @@ CMakeFiles/RayTracing.dir/clean:
 .PHONY : CMakeFiles/RayTracing.dir/clean
 
 CMakeFiles/RayTracing.dir/depend:
-	cd /Users/iesteem/Code/games101/job5:RayTracing/Code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/iesteem/Code/games101/job5:RayTracing/Code /Users/iesteem/Code/games101/job5:RayTracing/Code /Users/iesteem/Code/games101/job5:RayTracing/Code/build /Users/iesteem/Code/games101/job5:RayTracing/Code/build /Users/iesteem/Code/games101/job5:RayTracing/Code/build/CMakeFiles/RayTracing.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/iesteem/Code/games101/job5:RayTracing/code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/iesteem/Code/games101/job5:RayTracing/code /Users/iesteem/Code/games101/job5:RayTracing/code /Users/iesteem/Code/games101/job5:RayTracing/code/build /Users/iesteem/Code/games101/job5:RayTracing/code/build /Users/iesteem/Code/games101/job5:RayTracing/code/build/CMakeFiles/RayTracing.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/RayTracing.dir/depend
 

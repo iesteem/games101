@@ -1,6 +1,6 @@
 CMakeFiles/RayTracing.dir/main.cpp.o: \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/main.cpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Scene.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/main.cpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Scene.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__config \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__config_site \
@@ -352,7 +352,7 @@ CMakeFiles/RayTracing.dir/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__algorithm/unique_copy.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__algorithm/unique.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Vector.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Vector.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/cmath \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/math.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/math.h \
@@ -421,11 +421,11 @@ CMakeFiles/RayTracing.dir/main.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Object.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/global.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Object.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/global.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/random \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/numeric \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Light.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Sphere.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Triangle.hpp \
-  /Users/iesteem/Code/games101/job5:RayTracing/Code/Renderer.hpp
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Light.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Sphere.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Triangle.hpp \
+  /Users/iesteem/Code/games101/job5:RayTracing/code/Renderer.hpp
