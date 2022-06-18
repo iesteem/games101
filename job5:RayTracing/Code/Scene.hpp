@@ -28,6 +28,6 @@ public:
 
 private:
     // creating the scene (adding objects and lights)
-    std::vector<std::unique_ptr<Object> > objects;
+    std::vector<std::unique_ptr<Object> > objects;//物体数组，元素为持有Object类型的智能指针unique_ptr
     std::vector<std::unique_ptr<Light> > lights;
 };
