@@ -2,14 +2,13 @@
 #include <cstring>
 #include "Object.hpp"
 
-
+/*
+**判断三角形与光线是否相交
+**函数形参：v0、v1、v2分别是三角形的三个顶点；orig和dir表示光线的起始点和方向；tnear表示光线与三角形相交时光线的传播时间；u、v表示相交点对三角形的重心坐标(通过u和v值能算出另一个变量的值)
+*/
 bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1, const Vector3f& v2, const Vector3f& orig,
                           const Vector3f& dir, float& tnear, float& u, float& v)
 {
-    // TODO: Implement this function that tests whether the triangle
-    // that's specified bt v0, v1 and v2 intersects with the ray (whose
-    // origin is *orig* and direction is *dir*)
-    // Also don't forget to update tnear, u and v.
     //克莱姆法则
     Vector3f E1 = v1 - v0;
     Vector3f E2 = v2 - v0;
@@ -18,8 +17,8 @@ bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1, const Vector3f
     Vector3f S2 = crossProduct(S, E1);
 
     tnear = 1.0f / dotProduct(S1, E1) * dotProduct(S2, E2);
-    u = 1.0f / dotProduct(S1, E1) * dotProduct(S1, S);
-    v = 1.0f / dotProduct(S1, E1) * dotProduct(S2, dir);
+    u = 1.0f / dotProduct(S1, E1) * dotProduct(S1, S);//修饰v1
+    v = 1.0f / dotProduct(S1, E1) * dotProduct(S2, dir);//修饰v2
 
     // if the answer is valid, return true;
     if(tnear > 0.0f && v >= 0.0f && v <= 1.0f && u >= 0.0f && u <= 1.0f)  return true;

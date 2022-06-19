@@ -8,8 +8,8 @@
             "defines": [],
             "macFrameworkPath": [],
             "compilerPath": "/opt/homebrew/bin/gcc-11",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++17",
+            "cStandard": "gnu19",
+            "cppStandard": "gnu++19",
             "intelliSenseMode": "macos-gcc-arm64",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
