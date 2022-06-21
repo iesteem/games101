@@ -13,10 +13,10 @@
 int main(int argc, char** argv)
 {
 
-    // Change the definition here to change resolution
-    // Scene scene(784, 784);
-    Scene scene(1024, 1024);
-    // Scene scene(160, 160);
+    //调整不同的分辨率(Screen 上的像素总数)
+    //Scene scene(784, 784);
+    //Scene scene(1024, 1024);
+    Scene scene(160, 160);
 
     Material* red = new Material(DIFFUSE, Vector3f(0.0f));
     red->Kd = Vector3f(0.63f, 0.065f, 0.05f);

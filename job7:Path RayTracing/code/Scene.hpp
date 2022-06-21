@@ -26,7 +26,7 @@ public:
 
     Intersection intersect(const Ray& ray) const;
 
-    BVHAccel *bvh;
+    BVHAccel *bvh;//BVH树操作类型
     void buildBVH();
     Vector3f castRay(const Ray &ray, int depth) const;
     void sampleLight(Intersection &pos, float &pdf) const;

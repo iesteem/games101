@@ -48,7 +48,7 @@ class Bounds3
         return 2 * (d.x * d.y + d.x * d.z + d.y * d.z);
     }
 
-    Vector3f Centroid() { return 0.5 * pMin + 0.5 * pMax; }
+    Vector3f Centroid() { return 0.5 * pMin + 0.5 * pMax; }//包围盒的中心坐标
     
     Bounds3 Intersect(const Bounds3& b)
     {

@@ -1,9 +1,5 @@
-//
-// Created by goksu on 2/25/20.
-//
-#include "Scene.hpp"
-
 #pragma once
+#include "Scene.hpp"
 struct hit_payload
 {
     float tNear;

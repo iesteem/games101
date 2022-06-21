@@ -1,8 +1,14 @@
 #include "Scene.hpp"
 
+/*
+**为scene创建BVH树
+*/
 void Scene::buildBVH() {
     printf(" - Generating BVH...\n\n");
     this->bvh = new BVHAccel(objects, 1, BVHAccel::SplitMethod::NAIVE);
+    //objects形参来源于Scene类型中的数据成员，其内包含了scene内的全部object
+    //第二个形参 1 表示每个包围盒内仅包含一个物体
+    //NAIVE指BVH中对物体的划分方法
 }
 
 /*
