@@ -13,8 +13,8 @@ void Renderer::Render(const Scene& scene)
 {
     std::vector<Vector3f> framebuffer(scene.width * scene.height);//存储像素点颜色的数组
 
-    float scale = tan(deg2rad(scene.fov * 0.5));
-    float imageAspectRatio = scene.width / (float)scene.height;
+    float scale = tan(deg2rad(scene.fov * 0.5));//tan(fov/2)
+    float imageAspectRatio = scene.width / (float)scene.height;//屏幕宽高比
     Vector3f eye_pos(278, 273, -800);
     int m = 0;
 

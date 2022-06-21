@@ -93,7 +93,6 @@ public:
         //球坐标系(r, theta, phi)
         //theta表示原点到点P的连线与+z轴之间的天顶角，phi表示原点到点P的连线在xy平面的投影线，与+x轴之间的方位角
         //对于整个球体，theta取值在[0,π]间，phi取值在[0,2π]间
-        float theta = 2.0 * M_PI * get_random_float(), phi = M_PI * get_random_float();
         float theta = M_PI * get_random_float(), phi = 2.0 * M_PI * get_random_float();
 
         //理论上：将球坐标系(r, theta, phi)转化为直角坐标系(x, y, z)

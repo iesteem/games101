@@ -9,63 +9,79 @@
 
 inline double Degree(double angle)  {return angle*MY_PI/180.0;}
 
+
 Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
 {
-    Eigen::Matrix4f view = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f view = Eigen::Matrix4f::Identity();//四维单位矩阵
 
-    Eigen::Matrix4f translate;
-    
+    Eigen::Matrix4f translate;//将摄像机位置作为原点的变换矩阵
     translate << 1,0,0,-eye_pos[0],
                  0,1,0,-eye_pos[1],
                  0,0,1,-eye_pos[2],
                  0,0,0,1;
 
     view = translate*view;
-
     return view;
 }
 
 Eigen::Matrix4f get_model_matrix(float angle)
 {
-    Eigen::Matrix4f rotation;
     angle = angle * MY_PI / 180.f;
+    Eigen::Matrix4f rotation;//绕y轴旋转angle弧度的变换矩阵
     rotation << cos(angle), 0, sin(angle), 0,
                 0, 1, 0, 0,
                 -sin(angle), 0, cos(angle), 0,
                 0, 0, 0, 1;
 
-    Eigen::Matrix4f scale;
+    Eigen::Matrix4f scale;//x、y、z坐标值均缩放2.5倍的变换矩阵
     scale << 2.5, 0, 0, 0,
-              0, 2.5, 0, 0,
-              0, 0, 2.5, 0,
-              0, 0, 0, 1;
+             0, 2.5, 0, 0,
+             0, 0, 2.5, 0,
+             0, 0, 0, 1;
 
-    Eigen::Matrix4f translate;
+    Eigen::Matrix4f translate;//单位矩阵
     translate << 1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1;
+                 0, 1, 0, 0,
+                 0, 0, 1, 0,
+                 0, 0, 0, 1;
 
     return translate * rotation * scale;
 }
 
-/*
-**projection变换矩阵
-*/
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
     Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
 
-    float n = zNear;
-    float f = zFar;
-    float t = -abs(zNear) * tan(Degree(eye_fov) / 2.0);
-    float r = t * aspect_ratio;
+    float f, n, l, r, b, t, fov;
+    fov = eye_fov / 180 * MY_PI;//弧度表示的eye_fov
+    n = -zNear;//near平面对应的z轴坐标值
+    f = -zFar;//near平面对应的z轴坐标值
+    t = tan(fov/2) * zNear;//top平面对应的y轴坐标值(height的一半)
+    b = -t;//bottom平面对应的y轴坐标值(负值)
+    r = t * aspect_ratio;//right平面对应的x轴坐标值(weight的一半)
+    l = -r;//left平面对应的x轴坐标值(负值)
 
-    projection << n/r, 0, 0, 0,
-                0, n/t, 0, 0,
-                0, 0, (n+f)/(n-f), -2*n*f/(n-f),
-                0, 0, 1, 0;
+    //透视->正交 perspective->orthographic
+    Eigen::Matrix4f pertoorth;
+    pertoorth << n, 0, 0, 0,
+                 0, n, 0, 0,
+                 0, 0, n + f, -n*f,
+                 0, 0, 1, 0;
 
+    //正交——平移
+    Eigen::Matrix4f orth1;
+    orth1 << 1, 0, 0, -(r + l) / 2,
+             0, 1, 0, -(t + b) / 2,
+             0, 0, 1, -(n + f) / 2,
+             0, 0, 0, 1;
+    //正交——缩放
+    Eigen::Matrix4f orth2;
+    orth2 << 2 / (r - l), 0, 0, 0,
+             0, 2 / (t - b), 0, 0,
+             0, 0, 2 / (n - f), 0,
+             0, 0, 0, 1;
+
+    projection = orth2 * orth1 * pertoorth;//从右到左
     return projection;
 }
 
